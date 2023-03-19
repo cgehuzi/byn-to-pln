@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/byn-to-pln/static/css/main.a20961b1.css",
+    "main.js": "/byn-to-pln/static/js/main.5a96b506.js",
+    "index.html": "/byn-to-pln/index.html",
+    "main.a20961b1.css.map": "/byn-to-pln/static/css/main.a20961b1.css.map",
+    "main.5a96b506.js.map": "/byn-to-pln/static/js/main.5a96b506.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a20961b1.css",
+    "static/js/main.5a96b506.js"
+  ]
+}
