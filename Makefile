@@ -12,4 +12,6 @@ build:
 
 deploy:
 	make build
+	git config --global user.email "mail.cgehuzi@gmail.com"
+  	git config --global user.name "cgehuzi"	
 	npx gh-pages -d build
