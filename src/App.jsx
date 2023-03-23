@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import _ from 'lodash';
-import { Card, Form, Navbar } from 'react-bootstrap';
+import { Card, Form } from 'react-bootstrap';
 
 const bynPath = 'https://developerhub.alfabank.by:8273/partner/1.0.1/public/nationalRates';
 const plnPath = 'https://api.nbp.pl/api/exchangerates/tables/c?format=json';
@@ -107,43 +107,54 @@ function App() {
 
   return (
     <div className="app">
-      <Navbar expand="lg" className="app__header shadow-sm bg-white">
-        <div className="container">
-          <Navbar.Brand className="me-3" href="/">
-            BYN to PLN converter
-          </Navbar.Brand>
-        </div>
-      </Navbar>
-      <div className="app__body my-5">
+      <div className="app__body">
         <div className="container">
           <div className="app__wrap">
             <div className="app__wrap-form">
               <Card className="shadow-sm border-0">
                 <Card.Body>
                   <div className="app__form">
-                    <div className="app__form-title">EUR</div>
-                    <Form.Group className="app__form-group">
-                      <Form.FloatingLabel controlId="byn1" label="BYN">
-                        <Form.Control
-                          type="text"
-                          inputMode="decimal"
-                          onChange={handleBynChange}
-                          value={bynValue}
-                        />
-                      </Form.FloatingLabel>
-                    </Form.Group>
-                    <Form.Group className="app__form-group">
-                      <Form.FloatingLabel controlId="eur" label="EUR">
-                        <Form.Control
-                          type="text"
-                          inputMode="decimal"
-                          onChange={handleEurChange}
-                          value={eurValue}
-                        />
-                      </Form.FloatingLabel>
-                    </Form.Group>
-                    <div className="app__form-result">
-                      <span>{priceFormat(eurPlnValue)}</span> PLN
+                    <div className="app__form-header">
+                      <div className="app__form-title">EUR</div>
+                      <div className="app__form-result">
+                        <span>{priceFormat(eurPlnValue)}</span> PLN
+                      </div>
+                    </div>
+                    <div className="app__form-body">
+                      <Form.Group className="app__form-group">
+                        <Form.FloatingLabel
+                          controlId="eurByn"
+                          label={
+                            <span className="app__form-label">
+                              <span>BYN</span> <span>{bynRates.eur}</span>
+                            </span>
+                          }
+                        >
+                          <Form.Control
+                            type="text"
+                            inputMode="decimal"
+                            onChange={handleBynChange}
+                            value={bynValue}
+                          />
+                        </Form.FloatingLabel>
+                      </Form.Group>
+                      <Form.Group className="app__form-group">
+                        <Form.FloatingLabel
+                          controlId="eur"
+                          label={
+                            <span className="app__form-label">
+                              <span>EUR</span> <span>{plnRates.eur}</span>
+                            </span>
+                          }
+                        >
+                          <Form.Control
+                            type="text"
+                            inputMode="decimal"
+                            onChange={handleEurChange}
+                            value={eurValue}
+                          />
+                        </Form.FloatingLabel>
+                      </Form.Group>
                     </div>
                   </div>
                 </Card.Body>
@@ -153,36 +164,52 @@ function App() {
               <Card className="shadow-sm border-0">
                 <Card.Body>
                   <div className="app__form">
-                    <div className="app__form-title">USD</div>
-                    <Form.Group className="app__form-group">
-                      <Form.FloatingLabel controlId="byn2" label="BYN">
-                        <Form.Control
-                          type="text"
-                          inputMode="decimal"
-                          onChange={handleBynChange}
-                          value={bynValue}
-                        />
-                      </Form.FloatingLabel>
-                    </Form.Group>
-                    <Form.Group className="app__form-group">
-                      <Form.FloatingLabel controlId="usd" label="USD">
-                        <Form.Control
-                          type="text"
-                          inputMode="decimal"
-                          onChange={handleUsdChange}
-                          value={usdValue}
-                        />
-                      </Form.FloatingLabel>
-                    </Form.Group>
-                    <div className="app__form-result">
-                      <span>{priceFormat(usdPlnValue)}</span> PLN
+                    <div className="app__form-header">
+                      <div className="app__form-title">USD</div>
+                      <div className="app__form-result">
+                        <span>{priceFormat(usdPlnValue)}</span> PLN
+                      </div>
+                    </div>
+                    <div className="app__form-body">
+                      <Form.Group className="app__form-group">
+                        <Form.FloatingLabel
+                          controlId="usdByn"
+                          label={
+                            <span className="app__form-label">
+                              <span>BYN</span> <span>{bynRates.usd}</span>
+                            </span>
+                          }
+                        >
+                          <Form.Control
+                            type="text"
+                            inputMode="decimal"
+                            onChange={handleBynChange}
+                            value={bynValue}
+                          />
+                        </Form.FloatingLabel>
+                      </Form.Group>
+                      <Form.Group className="app__form-group">
+                        <Form.FloatingLabel
+                          controlId="usd"
+                          label={
+                            <span className="app__form-label">
+                              <span>USD</span> <span>{plnRates.usd}</span>
+                            </span>
+                          }
+                        >
+                          <Form.Control
+                            type="text"
+                            inputMode="decimal"
+                            onChange={handleUsdChange}
+                            value={usdValue}
+                          />
+                        </Form.FloatingLabel>
+                      </Form.Group>
                     </div>
                   </div>
                 </Card.Body>
               </Card>
             </div>
-            <div className="app__wrap-rates _byn"></div>
-            <div className="app__wrap-rates _pln"></div>
           </div>
         </div>
       </div>

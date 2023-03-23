@@ -11,73 +11,69 @@
     display: flex;
     justify-content: center;
     overflow: hidden;
+    padding: 24px 8px;
   }
 
   &__wrap {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    flex-direction: column;
+    gap: 24px;
+  }
 
-    &-form {
-      flex-basis: 100%;
-      max-width: 100%;
-    }
+  .card {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
   }
 
   &__form {
     display: flex;
-    gap: 15px;
+    flex-direction: column;
+    gap: 12px;
 
-    @include for-mobile {
-      flex-wrap: wrap;
+    &-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 1.1rem;
     }
 
     &-title {
       display: flex;
       align-items: center;
-      padding: 0 20px;
       font-weight: bold;
-      font-size: 18px;
       color: $primary;
       min-width: 100px;
-
-      @include for-mobile {
-        order: 1;
-        min-width: initial;
-        text-align: right;
-        padding: 0;
-      }
-    }
-
-    &-group {
-      width: 100%;
-
-      @include for-mobile {
-        order: 3;
-      }
     }
 
     &-result {
       display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 10px;
-      padding: 0 20px;
+      gap: 8px;
       white-space: nowrap;
-      font-size: 18px;
-      min-width: 300px;
-
-      @include for-mobile {
-        order: 2;
-        min-width: initial;
-        flex-grow: 1;
-        text-align: right;
-        padding: 0;
-      }
 
       span {
         font-weight: bold;
       }
+    }
+
+    &-body {
+      display: flex;
+      gap: 16px;
+    }
+
+    &-group {
+      width: 100%;
+    }
+
+    &-label {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .form-floating > label {
+      transform: translateY(-0.6rem) !important;
+      font-size: 0.8rem;
     }
   }
 }
