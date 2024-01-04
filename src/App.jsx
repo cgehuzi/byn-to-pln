@@ -7,25 +7,23 @@ const bynPath = 'https://developerhub.alfabank.by:8273/partner/1.0.1/public/nati
 const plnPath = 'https://api.nbp.pl/api/exchangerates/tables/c?format=json';
 
 function App() {
-  const [bynRates, setBynRates] = useState({ eur: 0, usd: 0 });
+  const [bynRates, setBynRates] = useState({ eur: 0, usd: 0, pln: 0 });
   const [bynLoaded, setBynLoaded] = useState(false);
   const [plnRates, setPlnRates] = useState({ eur: 0, usd: 0 });
   const [plnLoaded, setPlnLoaded] = useState(false);
-  const [bynValue, setBynValue] = useState(3725);
+  const [bynValue, setBynValue] = useState(4315);
+  const [bynPlnValue, setBynPlnValue] = useState(0);
   const [usdValue, setUsdValue] = useState(0);
   const [usdPlnValue, setUsdPlnValue] = useState(0);
   const [eurValue, setEurValue] = useState(0);
   const [eurPlnValue, setEurPlnValue] = useState(0);
 
-  const priceFormat = (price) => {
-    const formatter = new Intl.NumberFormat('ru', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    });
-    return formatter.format(Number(price));
-  };
+  const priceFormat = (price) => _.round(price, 2);
 
   const calcByn = (value) => {
+    const bynPln = value / bynRates.pln;
+    setBynPlnValue(bynPln);
+
     const bynEur = value / bynRates.eur;
     setEurValue(priceFormat(bynEur));
     const eurPln = bynEur * plnRates.eur;
@@ -54,9 +52,11 @@ function App() {
         const { rates } = response.data;
         const bynEur = _.find(rates, { iso: 'EUR' });
         const bynUsd = _.find(rates, { iso: 'USD' });
+        const bynPln = _.find(rates, { iso: 'PLN' });
         setBynRates({
-          eur: bynEur.rate,
-          usd: bynUsd.rate,
+          eur: bynEur.rate / bynEur.quantity,
+          usd: bynUsd.rate / bynUsd.quantity,
+          pln: bynPln.rate / bynPln.quantity,
         });
         setBynLoaded(true);
       } catch (error) {
@@ -110,6 +110,39 @@ function App() {
       <div className="app__body">
         <div className="container">
           <div className="app__wrap">
+            <div className="app__wrap-form">
+              <Card className="shadow-sm border-0">
+                <Card.Body>
+                  <div className="app__form">
+                    <div className="app__form-header">
+                      <div className="app__form-title">PLN</div>
+                      <div className="app__form-result">
+                        <span>{priceFormat(bynPlnValue)}</span> PLN
+                      </div>
+                    </div>
+                    <div className="app__form-body">
+                      <Form.Group className="app__form-group">
+                        <Form.FloatingLabel
+                          controlId="plnByn"
+                          label={
+                            <span className="app__form-label">
+                              <span>BYN</span> <span>{bynRates.pln}</span>
+                            </span>
+                          }
+                        >
+                          <Form.Control
+                            type="text"
+                            inputMode="decimal"
+                            onChange={handleBynChange}
+                            value={bynValue}
+                          />
+                        </Form.FloatingLabel>
+                      </Form.Group>
+                    </div>
+                  </div>
+                </Card.Body>
+              </Card>
+            </div>
             <div className="app__wrap-form">
               <Card className="shadow-sm border-0">
                 <Card.Body>
