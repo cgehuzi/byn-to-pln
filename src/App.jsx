@@ -11,7 +11,7 @@ function App() {
   const [bynLoaded, setBynLoaded] = useState(false);
   const [plnRates, setPlnRates] = useState({ eur: 0, usd: 0 });
   const [plnLoaded, setPlnLoaded] = useState(false);
-  const [bynValue, setBynValue] = useState(4315);
+  const [bynValue, setBynValue] = useState(4930);
   const [bynPlnValue, setBynPlnValue] = useState(0);
   const [usdValue, setUsdValue] = useState(0);
   const [usdPlnValue, setUsdPlnValue] = useState(0);
